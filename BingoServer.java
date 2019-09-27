@@ -127,11 +127,11 @@ class BingoServer
         Scanner scanner = new Scanner(System.in);
         
         
-        table[0] = new int[] {  1,  2,  3,  4,  5};
-        table[1] = new int[] {  6,  7,  8,  9, 10};
-        table[2] = new int[] { 11, 12, 13, 14, 15};
-        table[3] = new int[] { 16, 17, 18, 19, 20};
-        table[4] = new int[] { 21, 22, 23, 24, 25};
+        table[0] = new int[] {  6,  8,  14,  12,  23};
+        table[1] = new int[] {  16,  5,  1,  11, 4};
+        table[2] = new int[] { 18, 9, 7, 17, 19};
+        table[3] = new int[] { 15, 3, 24, 21, 20};
+        table[4] = new int[] { 10, 13, 2, 22, 25};
         
         
         System.out.println("Game started!");
@@ -158,18 +158,20 @@ class BingoServer
                 display(table);
                 if (isBingo(table))
                 {
-                    System.out.println("You lose");
+                    System.out.println("You win!");
+                    break;
                 }
-                
+
                 int sent = scanner.nextInt();
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(sk.getOutputStream()));
-                bw.write(String.format("%d", sent));
+                bw.write(String.format("%d\n", sent));
                 bw.flush();
                 cross(table, sent);
                 display(table);
                 if (isBingo(table))
                 {
                     System.out.println("You win!");
+                    break;
                 }
 
             }
